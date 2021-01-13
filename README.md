@@ -27,56 +27,67 @@ Note
 
 # テーブル設計
 
-## userテーブル
-|Column                    |Type          |Options                |
-|--------------------------|--------------|-----------------------|
-|nick_name                 |string        |null: false            |
-|password                  |string        |null: false            |
-|email_address             |string        |null: false            |
-|birth_year                |integer       |null: false            |
-|birth_month               |integer       |null: false            |
-|birth_day                 |integer       |null: false            |
-|kana_first_name           |string        |null: false            |
-|kana_family_name          |string        |null: false            |
-|kanji_first_name          |string        |null: false            |
-|kanji_family_name         |string        |null: false            |
+## usersテーブル
+|Column                    |Type          |Options                        |
+|--------------------------|--------------|-------------------------------|
+|nick_name                 |string        |null: false                    |
+|encrypted_password        |string        |null: false                    |
+|email                     |string        |null: false                    |
+|birthday                  |date          |null: false                    |
+|kana_first_name           |string        |null: false                    |
+|kana_family_name          |string        |null: false                    |
+|kanji_first_name          |string        |null: false                    |
+|kanji_family_name         |string        |null: false                    |
+ 
+### Association
+
+- has_many :products
+- has_many :purchase_histories
+
+## productsテーブル
+|Column                    |Type          |Options                        |
+|--------------------------|--------------|-------------------------------|
+|name                      |string        |null: false                    |
+|text                      |text          |null: false                    |
+|price                     |integer       |null: false                    |
+|category                  |string        |null: false                    |
+|state_id                  |integer       |null: false                    |
+|delivery_fee_burden_id    |integer       |null: false                    |
+|shipment_source_id        |integer       |null: false                    |
+|day_to_ship_id            |integer       |null: false                    |
+|user                      |references    |null: false, foreign_key: true |
 
 ### Association
 
-- has_many :product
-- has_many :buyer
+- has_one    :purchase_histories
+- belongs_to :users
 
-## productテーブル
-|Column                    |Type          |Options                |
-|--------------------------|--------------|-----------------------|
-|item_name                 |string        |null: false            |
-|item_text                 |text          |null: false            |
-|price                     |integer       |null: false            |
-|item_category             |string        |null: false            |
-|item_state                |string        |null: false            |
-|delivery_fee_burden       |string        |null: false            |
-|shipment_source           |string        |null: false            |
-|day_to_ship               |integer       |null: false            |
+## purchase_historiesテーブル
+
+|Column                    |Type          |Options                        |
+|--------------------------|--------------|-------------------------------|
+|product                   |references    |null: false, foreign_key: true |
+|user                      |references    |null: false, foreign_key: true |
 
 ### Association
+- has_one    :buyer_information
+- belongs_to :products
+- belongs_to :users
 
-- has_one    :buyer
-- belongs_to :user
-
-## buyerテーブル
-|Column                    |Type          |Options                |
-|--------------------------|--------------|-----------------------|
-|postal_code               |integer       |null: false            |
-|prefecture                |string        |null: false            |
-|city_name                 |string        |null: false            |
-|address                   |string        |null: false            |
-|building_name             |string        |null: false            |
-|room_number               |string        |                       |
-|phone_number              |integer       |null: false            |
+## buyer_informationテーブル
+|Column                    |Type          |Options                        |
+|--------------------------|--------------|-------------------------------|
+|postal_code               |string        |null: false                    |
+|prefecture_id             |integer       |null: false                    |
+|city_name_id              |integer       |null: false                    |
+|address_id                |integer       |null: false                    |
+|building_name             |string        |null: false                    |
+|room_number               |string        |                               |
+|phone_number              |string        |null: false                    |
+|purchase_history          |references    |null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
-- belongs_to :product
+- belongs_to :purchase_histories
 
 # Author
 堀内 健矢
