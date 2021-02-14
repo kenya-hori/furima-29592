@@ -115,6 +115,7 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include ("Email has already been taken")
       end
+      
       it 'emailに@がないと登録ができないこと' do
         @user.email = 'sample.com'
         @user.valid?
