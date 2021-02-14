@@ -41,10 +41,10 @@ Note
  
 ### Association
 
-- has_many :products
+- has_many :items
 - has_many :purchase_histories
 
-## productsテーブル
+## itemsテーブル
 |Column                    |Type          |Options                        |
 |--------------------------|--------------|-------------------------------|
 |name                      |string        |null: false                    |
