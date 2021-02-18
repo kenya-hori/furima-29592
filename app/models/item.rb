@@ -9,4 +9,6 @@ class Item < ApplicationRecord
   belongs_to :delivery_fee_burden
   belongs_to :prefecture
 
+  validates :name, :text, presence: true
+  validates :category_id, :condition_id, :day_to_ship_id, :delivery_fee_burden_id, :prefecture_id, numericality: { ohther_than: 1 }
 end
