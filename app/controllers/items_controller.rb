@@ -3,11 +3,21 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @item = Item.new
   end
 
-  #仮として記入
-  #def message_params
-    #params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
-  #end
-  #仮として記入/
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  private
+  def item_params
+    params.require(:item).permit(:name, :text, :price, :category_id, :condition_id, :delivery_fee_burden_id, :prefecture_id, :day_to_ship_id, :image).merge(user_id: current_user.id)
+  end
+
 end
