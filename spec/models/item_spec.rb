@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品の新規登録' do
     context '新規登録できる時' do
-      it 'image、name、text、price、が存在し、category_id、condition_id、delivery_fee_burden_id、prefecture_id、day_to_ship_idが１以外であれば登録できる' do
+      it 'image、name、text、priceが存在し、category_id、condition_id、delivery_fee_burden_id、prefecture_id、day_to_ship_idが1以外であれば登録できる' do
         expect(@item).to be_valid
       end
       it 'priceが300から9999999の間であれば登録できる' do
@@ -46,6 +46,11 @@ RSpec.describe Item, type: :model do
         @item.price = '5010000000'
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price Out of setting range")
+      end
+      it 'priceが半角数字でないと登録できない' do
+        @item.price = 'あbc'
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Price Half-width number")
       end
       it 'category_idが1だと登録できない' do
         @item.category_id = '1'
