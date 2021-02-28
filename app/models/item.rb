@@ -5,10 +5,9 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
-  belongs_to :day_to_ship
   belongs_to :delivery_fee_burden
   belongs_to :prefecture
-  has_one_attached :image
+  belongs_to :day_to_ship
 
   with_options presence: true do
     validates :image
