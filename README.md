@@ -41,17 +41,17 @@ Note
  
 ### Association
 
-- has_many :products
+- has_many :items
 - has_many :purchase_histories
 
-## productsテーブル
+## itemsテーブル
 |Column                    |Type          |Options                        |
 |--------------------------|--------------|-------------------------------|
 |name                      |string        |null: false                    |
 |text                      |text          |null: false                    |
 |price                     |integer       |null: false                    |
 |category_id               |integer       |null: false                    |
-|state_id                  |integer       |null: false                    |
+|condition_id              |integer       |null: false                    |
 |delivery_fee_burden_id    |integer       |null: false                    |
 |prefecture_id             |integer       |null: false                    |
 |day_to_ship_id            |integer       |null: false                    |
