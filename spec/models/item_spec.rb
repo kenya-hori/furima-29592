@@ -37,18 +37,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price can't be blank")
       end
-      it 'priceが300より小さいと登録できない' do
-        @item.price = '50'
+      it 'priceが299以下だとと登録できない' do
+        @item.price = '200'
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price Out of setting range")
       end
       it 'priceが10000000以上だと登録できない' do
-        @item.price = '5010000000'
+        @item.price = '10000000'
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price Out of setting range")
       end
-      it 'priceが半角数字でないと登録できない' do
-        @item.price = 'あbc'
+      it 'priceが半角英数混合では登録できないこと' do
+        @item.price = '1234abc'
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Price Half-width number")
+      end
+      it 'priceが全角文字だと登録できない' do
+        @item.price = '１２３４５'
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Price Half-width number")
+      end
+      it 'priceが半角英字だと登録できない' do
+        @item.price = 'abcde'
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price Half-width number")
       end
