@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :day_to_ship
 
   with_options presence: true do
-    validates :image, presence: true
+    validates :image
     validates :name, length: { maximum: 40 }
     validates :text, length: { maximum: 1000 }
     validates :price, numericality: { only_integer: true, message: "Half-width number" }
