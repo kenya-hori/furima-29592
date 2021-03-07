@@ -126,34 +126,34 @@
     <%= link_to '新規投稿商品', new_item_path, class: "subtitle" %>
     <ul class='item-lists'>
 
-      <li class='list'>
-        <% @items.each do |item| %>
+      <% @items.each do |item| %>
+        <li class='list'>
           <%= link_to "#" do %>
-            <div class='item-img-content'>
-              <%= image_tag item.image, class: "item-img" if item.image.attached? %>
+              <div class='item-img-content'>
+                <%= image_tag item.image, class: "item-img" if item.image.attached? %>
 
-              <%# if @items.purchase_histroy.present? %> 　
-                <%#（135行と139行は#を、この行は＃と％を購入機能実装時に消す） div class='sold-out'> 
-                  <span>Sold Out!!</span>
-                </div>
-              <%# end %>
+                <%# if @items.purchase_histroy.present? %> 　
+                 <%#（135行と139行は#を、この行は#と％を購入機能実装時に消す） div class='sold-out'> 
+                    <span>Sold Out!!</span>
+                  </div>
+                <%# end %>
 
-            </div>
-            <div class='item-info'>
-              <h3 class='item-name'>
-                <%= item.name %>
-              </h3>
-              <div class='item-price'>
-                <span><%= item.price %>円<br><%= '配送料負担' %></span>
-                <div class='star-btn'>
-                  <%= image_tag "star.png", class:"star-icon" %>
-                  <span class='star-count'>0</span>
+              </div>
+              <div class='item-info'>
+                <h3 class='item-name'>
+                  <%= item.name %>
+                </h3>
+                <div class='item-price'>
+                    <span><%= item.price %>円<br><%= item.delivery_fee_burden.name %></span>
+                  <div class='star-btn'>
+                    <%= image_tag "star.png", class:"star-icon" %>
+                    <span class='star-count'>0</span>
+                  </div>
                 </div>
               </div>
-            </div>
           <% end %>
-        <% end %>
-      </li>
+        </li>
+      <% end %> 
 
       <%# 商品がないときに表示するダミー %>
       <% if @items.length == 0 %>
