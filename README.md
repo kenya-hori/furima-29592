@@ -68,7 +68,6 @@ Note
 |--------------------------|--------------|-------------------------------|
 |product                   |references    |null: false, foreign_key: true |
 |user                      |references    |null: false, foreign_key: true |
-|buyer_information         |references    |null: false, foreign_key: true |
 
 ### Association
 - has_one    :buyer_information
