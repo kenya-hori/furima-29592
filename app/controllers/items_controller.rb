@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :find_id, only: [:edit, :update]
   before_action :move_to_index, only: [:edit, :update]
-  before_action :find_id, only: [:edit, :update, :move_to_index]
 
   def index
     @items = Item.order('created_at DESC')
