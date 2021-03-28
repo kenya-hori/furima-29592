@@ -15,3 +15,4 @@ class ApplicationController < ActionController::Base
                                              :kanji_family_name])
   end
 end
+

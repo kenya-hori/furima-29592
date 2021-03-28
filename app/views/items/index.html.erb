@@ -132,11 +132,11 @@
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" if item.image.attached? %>
 
-                <%# if @items.purchase_histroy.present? %> 　
-                 <%#（135行と139行は#を、この行は#と％を購入機能実装時に消す） div class='sold-out'> 
+                <% if item.order.present? %> 
+                 <div class='sold-out'> 
                     <span>Sold Out!!</span>
                   </div>
-                <%# end %>
+                <% end %>
 
               </div>
               <div class='item-info'>
