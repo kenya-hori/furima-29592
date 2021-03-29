@@ -62,5 +62,4 @@ class ItemsController < ApplicationController
   def sold_out_item
     redirect_to root_path if @item.purchase_history.present?
   end
-
 end
