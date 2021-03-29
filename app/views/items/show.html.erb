@@ -9,13 +9,13 @@
     <div class='item-img-content'>
       <%= image_tag @item.image, class: "item-img" if @item.image.attached? %>
 
-      <%# 売切の表示（購入機能実装時にコメントアウトを消す）%>
-      <%# if @item.purchase_histroy.present? %>
-      <%# div class='sold-out'> 
-        <span>Sold Out!!</span>
-      </div>
+      <%# 売切の表示 %>
+      <% if @item.purchase_history.present? %>
+       <div class='sold-out'> 
+         <span>Sold Out!!</span>
+       </div>
       <% end %>
-      <%# /売切の表示（購入機能実装時にコメントアウトを消す）%>
+      <%# /売切の表示 %>
 
     </div>
     <div class="item-price-box">
@@ -29,8 +29,8 @@
 
     <%# ログインの有無＞商品が残ってるか否か＞本人か否かの条件分岐 %>
     <% if user_signed_in? %>
-      <%# if @item.purchase_histroy.present? %><%# 購入機能実装時にコメントアウトを消す %>
-      <%# else %>
+      <% if @item.purchase_history.present? %>
+      <% else %>
         <% if current_user.id == @item.user_id %>
           <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
           <p class='or-text'>or</p>
@@ -38,7 +38,7 @@
         <% else %>
             <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
         <% end %>
-      <%# end %><%# /購入機能実装時にコメントアウトを消す %>
+      <% end %>
     <% end %>
     <%# /ログインの有無＞商品が残ってるか否か＞本人か否かの条件分岐 %>
 
