@@ -42,5 +42,6 @@ class OrdersController < ApplicationController
   def move_to_index
     redirect_to root_path if current_user.id == @item.user_id || @item.purchase_history.present?
   end
+  
+end
 
- 
