@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   before do
     @order = FactoryBot.build(:order)
+    @order.user_id = '1'
+    @order.item_id = '11'
   end
 
   describe '購入情報の保存' do
     context '購入情報の保存ができる時' do
-      it 'token、postal_code、city_name、address、building_name、phone_numberが存在し、prefecture_idが1以外であれば登録できる' do
+      it 'token、postal_code、city_name、address、building_name、phone_number、user_id、item_idが存在し、prefecture_idが1以外であれば登録できる' do
         expect(@order).to be_valid
       end
       it 'building_nameは空でも保存ができる' do
@@ -71,6 +73,21 @@ RSpec.describe Order, type: :model do
         @order.phone_number = '１２３４５'
         @order.valid?
         expect(@order.errors.full_messages).to include('Phone number Half-width number')
+      end
+      it 'phone_numberが12桁以上だと登録できない' do
+        @order.phone_number = '090123456789'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
+      it 'user_idが空だと登録ができない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと登録ができない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

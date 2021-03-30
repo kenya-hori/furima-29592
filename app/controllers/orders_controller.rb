@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
   before_action :move_to_index, only: [:index, :create]
-  before_action :sold_out_item, only: [:index, :create]
 
   def index
     @order = Order.new
@@ -41,10 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    redirect_to user_session_path if current_user.id == @item.user_id
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase_history.present?
   end
 
-  def sold_out_item
-    redirect_to root_path if @item.purchase_history.present?
-  end
-end
+ 

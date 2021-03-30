@@ -9,6 +9,8 @@ class Order
     validates :city_name
     validates :address
     validates :phone_number, numericality: { only_integer: true, message: 'Half-width number' }, length: { maximum: 11 }
+    validates :user_id
+    validates :item_id
   end
 
   def save # それぞれのテーブルへのデータ保存のための処理
