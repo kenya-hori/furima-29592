@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   before do
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
     @order = FactoryBot.build(:order)
-    @order.user_id = '1'
-    @order.item_id = '11'
+    @order.user_id = @user
+    @order.item_id = @item
   end
 
   describe '購入情報の保存' do
