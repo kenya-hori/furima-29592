@@ -66,15 +66,15 @@ Note
 
 |Column                    |Type          |Options                        |
 |--------------------------|--------------|-------------------------------|
-|product                   |references    |null: false, foreign_key: true |
+|item                      |references    |null: false, foreign_key: true |
 |user                      |references    |null: false, foreign_key: true |
 
 ### Association
-- has_one    :buyer_information
-- belongs_to :product
+- belongs_to :item
 - belongs_to :user
+- has_one    :buyer_info
 
-## buyer_informationテーブル
+## buyer_infoテーブル
 |Column                    |Type          |Options                        |
 |--------------------------|--------------|-------------------------------|
 |postal_code               |string        |null: false                    |

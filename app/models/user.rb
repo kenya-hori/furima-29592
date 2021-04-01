@@ -11,4 +11,5 @@ class User < ApplicationRecord
     validates :kana_family_name, :kana_first_name, format: { with: /\A[ァ-ヶー－]+\z/, message: 'Full-width katakana characters' }
   end
   has_many :items
+  has_many :purchase_histories
 end
